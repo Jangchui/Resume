@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J. Pan - Civil Engineering Student</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+:root {
+    --primary-color: #4a90e2; /* A friendly blue */
+    --secondary-color: #f4f7f6; /* A soft, light gray */
+    --dark-color: #333;
+    --light-color: #fff;
+    --text-color: #555;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50vh;
+    width: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+    overflow: hidden;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar:hover {
+    width: 200px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: var(--dark-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.sidebar ul li a .fa-user,
+.sidebar ul li a .fa-cogs,
+.sidebar ul li a .fa-graduation-cap,
+.sidebar ul li a .fa-project-diagram,
+.sidebar ul li a .fa-briefcase,
+.sidebar ul li a .fa-envelope {
+    min-width: 30px;
+    text-align: center;
+}
+
+.sidebar ul li a span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.sidebar:hover ul li a span {
+    opacity: 1;
+}
+
+.sidebar ul li a.active {
+    background: rgba(74, 144, 226, 0.3);
+    border-left: 3px solid var(--primary-color);
+}
+
+.sidebar ul li a:hover {
+    background: rgba(74, 144, 226, 0.2);
+}
+
+main {
+    padding: 40px 20px 40px 80px; /* Add padding to the left to not be overlapped by the sidebar */
+}
+
+section {
+    min-height: 100vh; /* Make each section fill the viewport height */
+    display: flex; /* Use flexbox for vertical centering */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally if needed, or adjust for text alignment */
+    padding: 60px 0; /* Keep some padding for content */
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center; /* Default text alignment for sections */
+}
+
+/* Adjustments for specific sections that might need different alignment */
+#hero {
+    background-color: var(--light-color);
+}
+
+#about, #skills, #education, #projects, #experience, #contact {
+    /* Align text left within these sections, while the section itself is centered */
+    text-align: left;
+}
+
+#contact {
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.hero-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+.btn-primary:hover {
+    background-color: #357ABD;
+}
+
+.btn-secondary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    color: var(--dark-color);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.skill-card {
+    background-color: var(--light-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.project-card, .education-item, .experience-item {
+    background-color: var(--light-color);
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+#contact {
+    text-align: center;
+}
+
+.social-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <ul>
+            <li><a href="#about"><i class="fas fa-user"></i><span>Professional Summary</span></a></li>
+            <li><a href="#skills"><i class="fas fa-cogs"></i><span>Skills</span></a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i><span>Education</span></a></li>
+            <li><a href="#internships"><i class="fas fa-briefcase"></i><span>Internships</span></a></li>
+            <li><a href="#certifications"><i class="fas fa-certificate"></i><span>Certifications</span></a></li>
+            <li><a href="#languages-strengths"><i class="fas fa-language"></i><span>Languages & Strengths</span></a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1>J. Pan</h1>
+                <h2>Site Engineer | CAD Drafter (Civil Engineering)</h2>
+                <div class="hero-buttons">
+                    <a href="resume.pdf" download="resume.pdf" class="btn btn-primary">Download Resume</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>Professional Summary</h2>
+            <p>Result-oriented Third-Year Civil Engineering student at NIT Manipur with strong exposure to site execution and CAD drafting. Skilled in AutoCAD and civil engineering software, with internship experience at IIT Guwahati and PWD Manipur. Known for efficient task execution, quick learning, and optimizing workflows without compromising quality.</p>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Engineering Software</h3>
+                    <ul>
+                        <li>AutoCAD</li>
+                        <li>Hyrcan</li>
+                        <li>Adonis</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Office Tools</h3>
+                    <ul>
+                        <li>MS Word</li>
+                        <li>Excel</li>
+                        <li>PowerPoint</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Web Development & Version Control</h3>
+                    <ul>
+                        <li>HTML (basic)</li>
+                        <li>CSS (basic)</li>
+                        <li>Git (basic)</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Engineering Skills</h3>
+                    <ul>
+                        <li>Drawing interpretation</li>
+                        <li>Basic quantity estimation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>B.Tech in Civil Engineering (Ongoing)</h3>
+                <p>National Institute of Technology, Manipur</p>
+                <p>Expected Graduation: N/A</p>
+            </div>
+            <div class="education-item">
+                <h3>Class XII (2022)</h3>
+                <p>MECI Explorer Academy</p>
+                <p>Percentage: 70.6%</p>
+            </div>
+            <div class="education-item">
+                <h3>Class X (2020)</h3>
+                <p>Christ Jyoti School</p>
+                <p>Percentage: 73.66%</p>
+            </div>
+        </section>
+
+        <section id="internships">
+            <h2>Internships</h2>
+            <div class="experience-item">
+                <h3>Intern - Indian Institute of Technology (IIT) Guwahati</h3>
+                <p>Assisted in understanding site drawings, measurements, and documentation</p>
+                <p>Observed construction practices and quality control procedures</p>
+            </div>
+            <div class="experience-item">
+                <h3>Intern - PWD Manipur</h3>
+                <p>Gained exposure to government construction projects and site supervision</p>
+                <p>Assisted engineers in measurements, reports, and drawing review</p>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="experience-item">
+                <h3>3-day Training on Mechanical, Electrical, Plumbing & Fire Protection (MEPF) Systems</h3>
+            </div>
+            <div class="experience-item">
+                <h3>6-month Diploma in Computer Applications</h3>
+            </div>
+        </section>
+
+        <section id="languages-strengths">
+            <h2>Languages & Strengths</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Languages</h3>
+                    <ul>
+                        <li>Rongmei (Native)</li>
+                        <li>English (Fluent)</li>
+                        <li>Manipuri (Fluent)</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Strengths</h3>
+                    <ul>
+                        <li>Fast learner with interest in new technology</li>
+                        <li>Efficient task completion with strong attention to quality</li>
+                        <li>Adaptable to both site and office environments</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>I'm currently seeking placement opportunities. Feel free to reach out!</p>
+            <p>Phone: [Your Phone]</p>
+            <p>Email: <a href="mailto:[Your Email]">[Your Email]</a></p>
+            <p>LinkedIn: <a href="[Your LinkedIn URL]" target="_blank">[Your LinkedIn URL]</a></p>
+            <p>Location: Manipur, India</p>
+            <p>Institution: National Institute of Technology, Manipur</p>
+        </section>
+    </main>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scrolling for sidebar links
+    document.querySelectorAll('.sidebar a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Intersection Observer for active section highlighting
+    const sections = document.querySelectorAll('section');
+    const navLi = document.querySelectorAll('.sidebar ul li a');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5 // 50% of the section must be visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLi.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
+    </script>
+</body>
+</html>
