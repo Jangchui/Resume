@@ -6,6 +6,10 @@
     --text-color: #555;
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -16,12 +20,30 @@ body {
     line-height: 1.6;
     background-color: var(--secondary-color);
     color: var(--text-color);
+    font-size: 16px; /* Base font size */
 }
 
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 20px; /* Adjust padding for smaller screens */
+}
+
+/* Hamburger Menu for Mobile */
+.hamburger-menu {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001; /* Above sidebar */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .sidebar {
@@ -36,7 +58,7 @@ body {
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    transition: width 0.3s ease;
+    transition: width 0.3s ease, left 0.3s ease; /* Add left to transition */
     overflow: hidden;
     z-index: 1000;
     display: flex;
@@ -96,6 +118,7 @@ body {
 
 main {
     padding: 40px 20px 40px 80px; /* Add padding to the left to not be overlapped by the sidebar */
+    transition: padding-left 0.3s ease;
 }
 
 section {
@@ -113,9 +136,14 @@ section {
     background-color: var(--light-color);
 }
 
-#about, #skills, #education, #projects, #experience, #contact {
+#about, #skills, #education, #internships, #certifications, #languages-strengths, #contact {
     /* Align text left within these sections, while the section itself is centered */
     text-align: left;
+}
+
+/* Adjustments for specific sections that might need different alignment */
+#hero {
+    background-color: var(--light-color);
 }
 
 #contact {
@@ -132,6 +160,87 @@ section {
     font-size: 1.5em;
     margin-bottom: 20px;
     color: var(--primary-color);
+}
+
+.profile-picture {
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Should be equal to width for a perfect circle */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover; /* Ensure image covers the area without distortion */
+    margin-bottom: 20px; /* Space between image and name */
+    border: 5px solid var(--primary-color); /* Optional: add a border */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: add a subtle shadow */
+}
+
+.hero-content p {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    /* Center the paragraph */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    /* ... existing styles ... */
+
+    .hero-content h1 {
+        font-size: 2.8em; /* Slightly smaller for tablets */
+    }
+
+    .hero-content h2 {
+        font-size: 1.4em; /* Slightly smaller for tablets */
+    }
+
+    .hero-content p {
+        max-width: 90%; /* Allow paragraph to take more width on tablets */
+    }
+
+    /* ... existing styles ... */
+}
+
+/* Phone and below */
+@media (max-width: 480px) {
+    /* ... existing styles ... */
+
+    .hero-content h1 {
+        font-size: 2.2em; /* Smaller for phones */
+    }
+
+    .hero-content h2 {
+        font-size: 1.1em; /* Smaller for phones */
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Space between stacked buttons */
+    }
+
+    .btn {
+        width: 100%;
+        margin: 0;
+    }
+
+    .hero-content p {
+        background: none; /* Remove liquid glass background for phones */
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        box-shadow: none;
+        padding: 10px; /* Reduce padding for phones */
+        margin-top: 10px;
+        max-width: 100%; /* Allow paragraph to take full width on phones */
+    }
+
+    /* ... existing styles ... */
 }
 
 .btn {
@@ -191,6 +300,53 @@ h2 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
+/* Adjustments for specific sections that might need different alignment */
+#hero {
+    background-color: var(--light-color);
+}
+
+
+
+/* Responsive Design */
+
+/* Tablet and below */
+@media (max-width: 768px) {
+    /* ... existing styles ... */
+    section h2 {
+        font-size: 1.2em; /* Smaller h2 for tablets */
+        top: 15px;
+        left: 15px;
+    }
+    section {
+        padding-top: 60px; /* Adjust padding for smaller h2 */
+    }
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Further reduce minmax for tablets */
+        gap: 20px;
+    }
+    .education-item, .experience-item {
+        flex: 1 1 100%; /* Stack items on tablets */
+        min-width: unset; /* Remove min-width constraint */
+    }
+}
+
+/* Phone and below */
+@media (max-width: 480px) {
+    /* ... existing styles ... */
+    section h2 {
+        font-size: 1em; /* Even smaller h2 for phones */
+        top: 10px;
+        left: 10px;
+    }
+    section {
+        padding-top: 50px; /* Adjust padding for smaller h2 */
+    }
+    .skills-grid {
+        grid-template-columns: 1fr; /* Single column for phones */
+        gap: 15px;
+    }
+}
+
 #contact {
     text-align: center;
 }
@@ -203,13 +359,92 @@ h2 {
 }
 
 /* Responsive Design */
+
+/* Tablet and below */
 @media (max-width: 768px) {
-    header nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
+    /* ... existing styles ... */
 
     .hero-content h1 {
-        font-size: 2.5em;
+        font-size: 2.8em; /* Slightly smaller for tablets */
+    }
+
+    .hero-content h2 {
+        font-size: 1.4em; /* Slightly smaller for tablets */
+    }
+
+    /* ... existing styles ... */
+}
+
+/* Phone and below */
+@media (max-width: 480px) {
+    /* ... existing styles ... */
+
+    .hero-content h1 {
+        font-size: 2.2em; /* Smaller for phones */
+    }
+
+    .hero-content h2 {
+        font-size: 1.1em; /* Smaller for phones */
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Space between stacked buttons */
+    }
+
+    .btn {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* ... existing styles ... */
+}
+
+/* Animation for hero content */
+.hero-content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+
+@keyframes fadeInSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Desktop and above */
+@media (min-width: 769px) {
+    .hamburger-menu {
+        display: none; /* Hide hamburger on desktop */
+    }
+
+    .sidebar {
+        /* Restore desktop sidebar styles */
+        left: 0; /* Ensure it's visible */
+        transform: translateY(-50%);
+        top: 50%;
+        height: 50vh;
+        width: 60px;
+        display: flex;
+        padding-top: 0;
+    }
+
+    .sidebar.active {
+        width: 200px; /* Maintain hover width if active class is somehow present */
+    }
+
+    .sidebar ul li a span {
+        opacity: 0;
+    }
+
+    .sidebar:hover ul li a span {
+        opacity: 1;
+    }
+
+    main {
+        padding-left: 80px; /* Adjust padding for desktop sidebar */
     }
 }
